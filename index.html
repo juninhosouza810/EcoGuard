@@ -145,16 +145,42 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
             padding: 20px;
             border: 2px dashed #4a7c59;
             border-radius: 10px;
             background: #f8f9fa;
             transition: all 0.3s ease;
+            gap: 10px;
         }
 
         .file-upload:hover .file-upload-label {
             background: #e8f5e8;
             border-color: #2c5530;
+        }
+
+        .camera-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .camera-btn {
+            background: linear-gradient(135deg, #17a2b8, #138496);
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .camera-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(23, 162, 184, 0.3);
         }
 
         .btn {
@@ -227,7 +253,7 @@
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             padding: 30px;
-            margin-top: 30px;
+            margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
@@ -269,6 +295,23 @@
             transform: translateX(400px);
             transition: transform 0.3s ease;
             z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background: #dc3545;
+        }
+
+        .notification.warning {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .notification.info {
+            background: #17a2b8;
         }
 
         .btn-view-location {
@@ -674,6 +717,196 @@
             opacity: 0.9;
         }
 
+        .btn-admin {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #6c757d, #495057);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-admin:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(108, 117, 125, 0.3);
+        }
+
+        .admin-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .admin-modal.show {
+            display: flex;
+        }
+
+        .admin-login-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .admin-login-container h3 {
+            color: #2c5530;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .admin-form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .admin-form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c5530;
+        }
+
+        .admin-form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .admin-form-group input:focus {
+            outline: none;
+            border-color: #4a7c59;
+        }
+
+        .btn-admin-login {
+            background: linear-gradient(135deg, #4a7c59, #2c5530);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .btn-admin-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(44, 85, 48, 0.3);
+        }
+
+        .btn-admin-cancel {
+            background: #6c757d;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-admin-cancel:hover {
+            background: #5a6268;
+        }
+
+        .admin-panel {
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        .admin-panel.show {
+            display: block;
+        }
+
+        .public-content.hide {
+            display: none;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, #3742fa, #2f3542);
+            color: white;
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-header h1 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-logout {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-logout:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        /* Esconder elementos específicos do admin */
+        .public-content .dashboard,
+        .public-content .reports-section {
+            display: none;
+        }
+
         @media (max-width: 768px) {
             .main-content {
                 grid-template-columns: 1fr;
@@ -686,175 +919,285 @@
             .stats-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .camera-options {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header class="header">
-            <h1>🌳 EcoGuard</h1>
-            <p>Sistema Inteligente de Combate ao Desmatamento e Queimadas</p>
-        </header>
+        <!-- Botão Admin -->
+        <button id="adminBtn" class="btn-admin">
+            🔒 Admin
+        </button>
 
-        <div class="main-content">
-            <!-- Formulário de Denúncia -->
-            <div class="card">
-                <h2>
-                    <span class="icon icon-report">🚨</span>
-                    Fazer Denúncia
-                </h2>
-                
-                <form id="reportForm">
+        <!-- Conteúdo Público -->
+        <div id="publicContent" class="public-content">
+            <header class="header">
+                <h1>🌳 EcoGuard</h1>
+                <p>Sistema Inteligente de Combate ao Desmatamento e Queimadas</p>
+            </header>
+
+            <div class="main-content">
+                <!-- Formulário de Denúncia -->
+                <div class="card">
+                    <h2>
+                        <span class="icon icon-report">🚨</span>
+                        Fazer Denúncia
+                    </h2>
+                    
+                    <form id="reportForm">
+                        <div class="form-group">
+                            <label for="reportType">Tipo de Ocorrência</label>
+                            <select id="reportType" required>
+                                <option value="">Selecione o tipo</option>
+                                <option value="desmatamento">Desmatamento</option>
+                                <option value="queimada">Queimada</option>
+                                <option value="ambos">Desmatamento e Queimada</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">Localização</label>
+                            <input type="text" id="location" placeholder="Endereço ou coordenadas GPS" required>
+                            <button type="button" id="viewLocationBtn" class="btn-view-location">
+                                🗺️ Visualizar Local
+                            </button>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Descrição da Ocorrência</label>
+                            <textarea id="description" rows="4" placeholder="Descreva detalhadamente o que foi observado..." required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="evidence">Evidências (Fotos/Vídeos)</label>
+                            <div class="file-upload">
+                                <input type="file" id="evidence" multiple accept="image/*,video/*" capture="environment">
+                                <div class="file-upload-label">
+                                    📎 Clique para anexar arquivos
+                                    <small>Ou use as opções abaixo:</small>
+                                </div>
+                            </div>
+                            <div class="camera-options">
+                                <button type="button" class="camera-btn" id="takePhotoBtn">📷 Tirar Foto</button>
+                                <button type="button" class="camera-btn" id="recordVideoBtn">🎥 Gravar Vídeo</button>
+                                <button type="button" class="camera-btn" id="selectFileBtn">📁 Arquivo</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reporterName">Nome do Denunciante</label>
+                            <input type="text" id="reporterName" placeholder="Seu nome (opcional)">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reporterContact">Contato</label>
+                            <input type="text" id="reporterContact" placeholder="Email ou telefone (opcional)">
+                        </div>
+
+                        <button type="submit" class="btn">Enviar Denúncia</button>
+                    </form>
+                </div>
+
+                <!-- Card de Informações -->
+                <div class="card">
+                    <h2>
+                        <span class="icon icon-drone">ℹ️</span>
+                        Como Funciona
+                    </h2>
+                    
+                    <div style="line-height: 1.8;">
+                        <p><strong>1. 📝 Faça sua denúncia</strong><br>
+                        Preencha o formulário com as informações da ocorrência.</p>
+                        
+                        <p><strong>2. 📸 Anexe evidências</strong><br>
+                        Fotos e vídeos ajudam na investigação.</p>
+                        
+                        <p><strong>3. 🗺️ Visualize o local</strong><br>
+                        Confirme a localização no mapa de satélite.</p>
+                        
+                        <p><strong>4. 🚨 Envio automático</strong><br>
+                        Sua denúncia é enviada automaticamente para:</p>
+                        
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                            <li>IBAMA</li>
+                            <li>Polícia Ambiental</li>
+                            <li>Secretaria do Meio Ambiente</li>
+                            <li>Corpo de Bombeiros</li>
+                        </ul>
+                        
+                        <p><strong>5. 📊 Monitoramento</strong><br>
+                        Sistema monitora continuamente as áreas reportadas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Painel Admin (Oculto) -->
+        <div id="adminPanel" class="admin-panel">
+            <div class="admin-header">
+                <h1>🛡️ Painel Administrativo</h1>
+                <button id="logoutBtn" class="btn-logout">
+                    🚪 Logout
+                </button>
+            </div>
+
+            <div class="admin-grid">
+                <!-- Dashboard de Estatísticas (Apenas Admin) -->
+                <div class="dashboard">
+                    <h2>📊 Dashboard de Monitoramento</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="totalReports">0</div>
+                            <div>Denúncias Recebidas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="activeDrones">2</div>
+                            <div>Drones Ativos</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="areasMonitored">15</div>
+                            <div>Areas Monitoradas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="alertsSent">0</div>
+                            <div>Alertas Enviados</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Monitoramento por Drones -->
+                <div class="card">
+                    <h2>
+                        <span class="icon icon-drone">🛸</span>
+                        Monitoramento por Drones
+                    </h2>
+
                     <div class="form-group">
-                        <label for="reportType">Tipo de Ocorrência</label>
-                        <select id="reportType" required>
-                            <option value="">Selecione o tipo</option>
-                            <option value="desmatamento">Desmatamento</option>
-                            <option value="queimada">Queimada</option>
-                            <option value="ambos">Desmatamento e Queimada</option>
-                        </select>
+                        <label for="droneArea">Área para Monitoramento</label>
+                        <input type="text" id="droneArea" placeholder="Insira o endereço da ocorrência">
+                        <small style="color: #666; font-size: 12px;">💡 Se vazio, será usado o endereço do campo "Localização"</small>
                     </div>
 
-                    <div class="form-group">
-                        <label for="location">Localização</label>
-                        <input type="text" id="location" placeholder="Endereço ou coordenadas GPS" required>
-                        <button type="button" id="viewLocationBtn" class="btn-view-location">
-                            🗺️ Visualizar Local
-                        </button>
-                    </div>
+                    <button type="button" id="deployDrone" class="btn btn-secondary">Iniciar Monitoramento</button>
 
-                    <div class="form-group">
-                        <label for="description">Descrição da Ocorrência</label>
-                        <textarea id="description" rows="4" placeholder="Descreva detalhadamente o que foi observado..." required></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="evidence">Evidências (Fotos/Vídeos)</label>
-                        <div class="file-upload">
-                            <input type="file" id="evidence" multiple accept="image/*,video/*">
-                            <div class="file-upload-label">
-                                📎 Clique para anexar arquivos
+                    <div class="drone-status">
+                        <h3>Status dos Drones</h3>
+                        <div class="status-item">
+                            <span>Drone Alpha-01</span>
+                            <div>
+                                <span>Ativo</span>
+                                <span class="status-indicator status-online"></span>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <span>Drone Beta-02</span>
+                            <div>
+                                <span>Carregando</span>
+                                <span class="status-indicator status-offline"></span>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <span>Drone Gamma-03</span>
+                            <div>
+                                <span>Patrulhando</span>
+                                <span class="status-indicator status-online"></span>
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="reporterName">Nome do Denunciante</label>
-                        <input type="text" id="reporterName" placeholder="Seu nome (opcional)">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="reporterContact">Contato</label>
-                        <input type="text" id="reporterContact" placeholder="Email ou telefone (opcional)">
-                    </div>
-
-                    <button type="submit" class="btn">Enviar Denúncia</button>
-                </form>
-            </div>
-
-            <!-- Monitoramento por Drones -->
-            <div class="card">
-                <h2>
-                    <span class="icon icon-drone">🛸</span>
-                    Monitoramento por Drones
-                </h2>
-
-                <div class="form-group">
-                    <label for="droneArea">Área para Monitoramento</label>
-                    <input type="text" id="droneArea" placeholder="Deixe vazio para usar a localização principal">
-                    <small style="color: #666; font-size: 12px;">💡 Se vazio, será usado o endereço do campo "Localização"</small>
                 </div>
 
-                <button type="button" id="deployDrone" class="btn btn-secondary">Iniciar Monitoramento</button>
+                <!-- Seção de Relatórios (Apenas Admin) -->
+                <div class="reports-section">
+                    <div class="reports-header">
+                        <h2>📋 Relatório de Denúncias</h2>
+                        <button id="downloadReportBtn" class="btn-download" disabled>
+                            📥 Baixar Relatório PDF
+                        </button>
+                    </div>
+                    
+                    <div class="reports-stats">
+                        <div class="stat-mini">
+                            <div class="stat-mini-number" id="totalReportsCount">0</div>
+                            <div class="stat-mini-label">Total</div>
+                        </div>
+                        <div class="stat-mini">
+                            <div class="stat-mini-number" id="desmatamentoCount">0</div>
+                            <div class="stat-mini-label">Desmatamento</div>
+                        </div>
+                        <div class="stat-mini">
+                            <div class="stat-mini-number" id="queimadaCount">0</div>
+                            <div class="stat-mini-label">Queimadas</div>
+                        </div>
+                        <div class="stat-mini">
+                            <div class="stat-mini-number" id="ambosCount">0</div>
+                            <div class="stat-mini-label">Ambos</div>
+                        </div>
+                    </div>
 
-                <div class="drone-status">
-                    <h3>Status dos Drones</h3>
-                    <div class="status-item">
-                        <span>Drone Alpha-01</span>
-                        <div>
-                            <span>Ativo</span>
-                            <span class="status-indicator status-online"></span>
-                        </div>
-                    </div>
-                    <div class="status-item">
-                        <span>Drone Beta-02</span>
-                        <div>
-                            <span>Carregando</span>
-                            <span class="status-indicator status-offline"></span>
-                        </div>
-                    </div>
-                    <div class="status-item">
-                        <span>Drone Gamma-03</span>
-                        <div>
-                            <span>Patrulhando</span>
-                            <span class="status-indicator status-online"></span>
+                    <div id="reportsList" class="reports-list">
+                        <div class="reports-empty">
+                            📝 Nenhuma denúncia registrada ainda.<br>
+                            <small>As denúncias enviadas aparecerão aqui automaticamente.</small>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Dashboard de Estatísticas -->
-        <div class="dashboard">
-            <h2>📊 Dashboard de Monitoramento</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number" id="totalReports">0</div>
-                    <div>Denúncias Recebidas</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="activeDrones">2</div>
-                    <div>Drones Ativos</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="areasMonitored">15</div>
-                    <div>Áreas Monitoradas</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="alertsSent">0</div>
-                    <div>Alertas Enviados</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Seção de Relatórios -->
-        <div class="reports-section">
-            <div class="reports-header">
-                <h2>📋 Relatório de Denúncias</h2>
-                <button id="downloadReportBtn" class="btn-download" disabled>
-                    📥 Baixar Relatório PDF
-                </button>
-            </div>
-            
-            <div class="reports-stats">
-                <div class="stat-mini">
-                    <div class="stat-mini-number" id="totalReportsCount">0</div>
-                    <div class="stat-mini-label">Total</div>
-                </div>
-                <div class="stat-mini">
-                    <div class="stat-mini-number" id="desmatamentoCount">0</div>
-                    <div class="stat-mini-label">Desmatamento</div>
-                </div>
-                <div class="stat-mini">
-                    <div class="stat-mini-number" id="queimadaCount">0</div>
-                    <div class="stat-mini-label">Queimadas</div>
-                </div>
-                <div class="stat-mini">
-                    <div class="stat-mini-number" id="ambosCount">0</div>
-                    <div class="stat-mini-label">Ambos</div>
-                </div>
-            </div>
-
-            <div id="reportsList" class="reports-list">
-                <div class="reports-empty">
-                    📝 Nenhuma denúncia registrada ainda.<br>
-                    <small>As denúncias enviadas aparecerão aqui automaticamente.</small>
+                <!-- Controle Administrativo -->
+                <div class="card">
+                    <h2>
+                        <span class="icon icon-report">📊</span>
+                        Controle Administrativo
+                    </h2>
+                    
+                    <div style="line-height: 2;">
+                        <p><strong>🎯 Recursos Disponíveis:</strong></p>
+                        
+                        <p>• <strong>Monitoramento em Tempo Real</strong><br>
+                        Controle total dos drones em campo</p>
+                        
+                        <p>• <strong>Deploy Automático</strong><br>
+                        Envio de drones para áreas específicas</p>
+                        
+                        <p>• <strong>Visão Aérea</strong><br>
+                        Interface em tempo real da câmera do drone</p>
+                        
+                        <p>• <strong>Detecção Inteligente</strong><br>
+                        IA detecta automaticamente atividades suspeitas</p>
+                        
+                        <p>• <strong>Relatórios Automáticos</strong><br>
+                        Dados salvos automaticamente no sistema</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <div id="notification" class="notification"></div>
+
+    <!-- Modal de Login Admin -->
+    <div id="adminModal" class="admin-modal">
+        <div class="admin-login-container">
+            <h3>🔐 Acesso Administrativo</h3>
+            <div class="admin-form-group">
+                <label for="adminUser">Usuário</label>
+                <input type="text" id="adminUser" placeholder="Digite o usuário">
+            </div>
+            <div class="admin-form-group">
+                <label for="adminPass">Senha</label>
+                <input type="password" id="adminPass" placeholder="Digite a senha">
+            </div>
+            <button id="adminLoginBtn" class="btn-admin-login">
+                🚀 Entrar
+            </button>
+            <button id="adminCancelBtn" class="btn-admin-cancel">
+                ❌ Cancelar
+            </button>
+        </div>
+    </div>
 
     <!-- Modal do Mapa -->
     <div id="mapModal" class="map-modal">
@@ -900,39 +1243,157 @@
         </div>
     </div>
 
-    <!-- Firebase SDK -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script type="module">
-        // Importar Firebase
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
-        import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
-        import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js';
-
-        // Configuração do Firebase (substitua pelas suas credenciais)
-        const firebaseConfig = {
-            apiKey: "sua-api-key",
-            authDomain: "ecoguard-app.firebaseapp.com",
-            projectId: "ecoguard-app",
-            storageBucket: "ecoguard-app.appspot.com",
-            messagingSenderId: "123456789",
-            appId: "1:123456789:web:abcdef123456"
+    <script>
+        // Variáveis globais para admin - CREDENCIAIS CORRIGIDAS
+        let isAdminLoggedIn = false;
+        const ADMIN_CREDENTIALS = {
+            username: 'admin2025',
+            password: '123456'
         };
 
-        // Inicializar Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const storage = getStorage(app);
-
-        // Variáveis globais
+        // Variáveis globais do sistema
         let reportCount = 0;
         let alertCount = 0;
-        let reportsData = []; // Array para armazenar todas as denúncias
+        let reportsData = [];
         let reportStats = {
             total: 0,
             desmatamento: 0,
             queimada: 0,
             ambos: 0
         };
+
+        // Função para mostrar notificações
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type} show`;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 4000);
+        }
+
+        // Função para configurar captura de câmera
+        function setupCameraCapture() {
+            const evidenceInput = document.getElementById('evidence');
+            const takePhotoBtn = document.getElementById('takePhotoBtn');
+            const recordVideoBtn = document.getElementById('recordVideoBtn');
+            const selectFileBtn = document.getElementById('selectFileBtn');
+
+            // Botão para tirar foto
+            takePhotoBtn.addEventListener('click', () => {
+                evidenceInput.setAttribute('accept', 'image/*');
+                evidenceInput.setAttribute('capture', 'environment');
+                evidenceInput.click();
+            });
+
+            // Botão para gravar vídeo
+            recordVideoBtn.addEventListener('click', () => {
+                evidenceInput.setAttribute('accept', 'video/*');
+                evidenceInput.setAttribute('capture', 'environment');
+                evidenceInput.click();
+            });
+
+            // Botão para selecionar arquivo
+            selectFileBtn.addEventListener('click', () => {
+                evidenceInput.setAttribute('accept', 'image/*,video/*');
+                evidenceInput.removeAttribute('capture');
+                evidenceInput.click();
+            });
+
+            // Atualizar label quando arquivo for selecionado
+            evidenceInput.addEventListener('change', (e) => {
+                const files = e.target.files;
+                const label = document.querySelector('.file-upload-label');
+                
+                if (files.length > 0) {
+                    const fileNames = Array.from(files).map(f => f.name).join(', ');
+                    label.innerHTML = `✅ ${files.length} arquivo(s) selecionado(s)<br><small>${fileNames}</small>`;
+                } else {
+                    label.innerHTML = '📎 Clique para anexar arquivos<br><small>Ou use as opções abaixo:</small>';
+                }
+            });
+        }
+
+        // Função para mostrar modal de login admin
+        function showAdminLogin() {
+            const modal = document.getElementById('adminModal');
+            modal.classList.add('show');
+            document.getElementById('adminUser').focus();
+        }
+
+        // Função para esconder modal de login admin
+        function hideAdminLogin() {
+            const modal = document.getElementById('adminModal');
+            modal.classList.remove('show');
+            document.getElementById('adminUser').value = '';
+            document.getElementById('adminPass').value = '';
+        }
+
+        // Função para fazer login admin
+        function attemptAdminLogin() {
+            const username = document.getElementById('adminUser').value.trim();
+            const password = document.getElementById('adminPass').value.trim();
+            
+            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                isAdminLoggedIn = true;
+                hideAdminLogin();
+                showAdminPanel();
+                showNotification('🛡️ Login administrativo realizado com sucesso!', 'success');
+            } else {
+                showNotification('❌ Credenciais inválidas. Use: admin2025 / 123456789', 'error');
+                document.getElementById('adminUser').value = '';
+                document.getElementById('adminPass').value = '';
+                document.getElementById('adminUser').focus();
+            }
+        }
+
+        // Função para mostrar painel admin
+        function showAdminPanel() {
+            document.getElementById('publicContent').classList.add('hide');
+            document.getElementById('adminPanel').classList.add('show');
+        }
+
+        // Função para fazer logout admin
+        function adminLogout() {
+            isAdminLoggedIn = false;
+            document.getElementById('adminPanel').classList.remove('show');
+            document.getElementById('publicContent').classList.remove('hide');
+            showNotification('🚪 Logout realizado com sucesso.', 'info');
+        }
+
+        // Event listeners para admin
+        document.getElementById('adminBtn').addEventListener('click', () => {
+            if (isAdminLoggedIn) {
+                showAdminPanel();
+            } else {
+                showAdminLogin();
+            }
+        });
+
+        document.getElementById('adminLoginBtn').addEventListener('click', attemptAdminLogin);
+        document.getElementById('adminCancelBtn').addEventListener('click', hideAdminLogin);
+        document.getElementById('logoutBtn').addEventListener('click', adminLogout);
+
+        // Fechar modal clicando fora
+        document.getElementById('adminModal').addEventListener('click', (e) => {
+            if (e.target.id === 'adminModal') {
+                hideAdminLogin();
+            }
+        });
+
+        // Login com Enter
+        document.getElementById('adminUser').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('adminPass').focus();
+            }
+        });
+
+        document.getElementById('adminPass').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                attemptAdminLogin();
+            }
+        });
 
         // Função para visualizar localização no mapa
         function showLocationOnMap(address) {
@@ -944,14 +1405,7 @@
             const modal = document.getElementById('mapModal');
             const mapFrame = document.getElementById('mapFrame');
             
-            // URL do Google Maps com visualização de satélite
             const encodedAddress = encodeURIComponent(address);
-            const mapUrl = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dUWTgEoZiKjbG8&q=${encodedAddress}&maptype=satellite&zoom=18`;
-            
-            // Alternativa usando OpenStreetMap (não requer API key)
-            const osmUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${encodedAddress}&layer=mapnik&marker=${encodedAddress}`;
-            
-            // Para desenvolvimento, vamos usar uma URL que funciona sem API key
             const workingUrl = `https://maps.google.com/maps?q=${encodedAddress}&t=k&z=18&ie=UTF8&iwloc=&output=embed`;
             
             mapFrame.src = workingUrl;
@@ -968,163 +1422,131 @@
             document.getElementById('mapModal').classList.remove('show');
         });
 
-        // Fechar modal clicando fora
+        // Fechar modal do mapa clicando fora
         document.getElementById('mapModal').addEventListener('click', (e) => {
             if (e.target.id === 'mapModal') {
                 document.getElementById('mapModal').classList.remove('show');
             }
         });
-        function showNotification(message, type = 'success') {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.className = `notification ${type}`;
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 4000);
-        }
 
-        // Função para upload de arquivos
-        async function uploadFiles(files) {
-            const uploadPromises = [];
+        // Função para adicionar denúncia à lista
+        function addReportToList(reportData) {
+            const reportsList = document.getElementById('reportsList');
             
-            for (let file of files) {
-                const storageRef = ref(storage, `evidence/${Date.now()}_${file.name}`);
-                uploadPromises.push(uploadBytes(storageRef, file).then(snapshot => getDownloadURL(snapshot.ref)));
+            // Remover mensagem vazia se existir
+            const emptyMessage = reportsList.querySelector('.reports-empty');
+            if (emptyMessage) {
+                emptyMessage.remove();
             }
-            
-            return Promise.all(uploadPromises);
-        }
 
-        // Função para enviar dados para autoridades (simulação)
-        async function notifyAuthorities(reportData) {
-            // Simulação de envio para autoridades
-            console.log('Enviando para autoridades:', reportData);
+            // Criar elemento da denúncia
+            const reportElement = document.createElement('div');
+            reportElement.className = 'report-item';
             
-            // Aqui você integraria com APIs dos órgãos ambientais
-            const authorities = [
-                'IBAMA',
-                'Polícia Ambiental',
-                'Secretaria do Meio Ambiente',
-                'Corpo de Bombeiros'
-            ];
+            const timestamp = new Date().toLocaleString('pt-BR');
+            const reportId = '#' + Math.random().toString(36).substr(2, 9).toUpperCase();
             
-            authorities.forEach(authority => {
-                console.log(`Notificação enviada para: ${authority}`);
-            });
-            
-            return true;
-        }
+            reportElement.innerHTML = `
+                <div class="report-header">
+                    <div class="report-id">${reportId}</div>
+                    <div class="report-timestamp">${timestamp}</div>
+                </div>
+                <div class="report-type ${reportData.type}">${reportData.type}</div>
+                <div class="report-location">📍 ${reportData.location}</div>
+                <div class="report-description">${reportData.description}</div>
+                <div class="report-reporter">👤 ${reportData.reporterName || 'Anônimo'}</div>
+            `;
 
-        // Função para simular geolocalização
-        function getCurrentLocation() {
-            return new Promise((resolve, reject) => {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(
-                        position => {
-                            resolve({
-                                lat: position.coords.latitude,
-                                lng: position.coords.longitude
-                            });
-                        },
-                        error => reject(error)
-                    );
-                } else {
-                    reject(new Error('Geolocalização não suportada'));
-                }
+            // Adicionar no início da lista
+            reportsList.insertBefore(reportElement, reportsList.firstChild);
+
+            // Atualizar estatísticas
+            updateReportStats(reportData.type);
+
+            // Habilitar botão de download se for o primeiro relatório
+            if (reportsData.length === 0) {
+                document.getElementById('downloadReportBtn').disabled = false;
+            }
+
+            // Adicionar aos dados
+            reportsData.unshift({
+                ...reportData,
+                id: reportId,
+                timestamp: timestamp
             });
         }
 
-        // Manipular formulário de denúncia
-        document.getElementById('reportForm').addEventListener('submit', async (e) => {
+        // Função para atualizar estatísticas
+        function updateReportStats(type) {
+            reportStats.total++;
+            reportStats[type]++;
+            
+            document.getElementById('totalReports').textContent = reportStats.total;
+            document.getElementById('totalReportsCount').textContent = reportStats.total;
+            document.getElementById('desmatamentoCount').textContent = reportStats.desmatamento;
+            document.getElementById('queimadaCount').textContent = reportStats.queimada;
+            document.getElementById('ambosCount').textContent = reportStats.ambos;
+        }
+
+        // Manipular formulário de denúncia - CORRIGIDO PARA MOSTRAR MENSAGEM DE SUCESSO
+        document.getElementById('reportForm').addEventListener('submit', (e) => {
             e.preventDefault();
             
-            try {
-                showNotification('Processando denúncia...', 'info');
-                
-                const formData = {
-                    type: document.getElementById('reportType').value,
-                    location: document.getElementById('location').value,
-                    description: document.getElementById('description').value,
-                    reporterName: document.getElementById('reporterName').value,
-                    reporterContact: document.getElementById('reporterContact').value,
-                    timestamp: serverTimestamp(),
-                    status: 'pending'
-                };
-                
-                // Upload de evidências
-                const evidenceFiles = document.getElementById('evidence').files;
-                if (evidenceFiles.length > 0) {
-                    showNotification('Fazendo upload das evidências...', 'info');
-                    formData.evidenceUrls = await uploadFiles(evidenceFiles);
-                }
-                
-                // Tentar obter localização GPS
-                try {
-                    const gpsLocation = await getCurrentLocation();
-                    formData.gpsCoordinates = gpsLocation;
-                } catch (error) {
-                    console.log('GPS não disponível:', error);
-                }
-                
-                // Salvar no Firebase
-                const docRef = await addDoc(collection(db, 'reports'), formData);
-                
-                // Notificar autoridades
-                await notifyAuthorities(formData);
+            const formData = {
+                type: document.getElementById('reportType').value,
+                location: document.getElementById('location').value,
+                description: document.getElementById('description').value,
+                reporterName: document.getElementById('reporterName').value,
+                reporterContact: document.getElementById('reporterContact').value
+            };
+            
+            // Adicionar à lista de relatórios (apenas se admin estiver logado)
+            if (isAdminLoggedIn) {
+                addReportToList(formData);
                 
                 // Atualizar estatísticas
-                reportCount++;
                 alertCount++;
-                document.getElementById('totalReports').textContent = reportCount;
                 document.getElementById('alertsSent').textContent = alertCount;
-                
-                // Limpar formulário
-                document.getElementById('reportForm').reset();
-                
-                showNotification('Denúncia enviada com sucesso! Autoridades foram notificadas.', 'success');
-                
-            } catch (error) {
-                console.error('Erro ao processar denúncia:', error);
-                showNotification('Erro ao enviar denúncia. Tente novamente.', 'error');
             }
+            
+            // Limpar formulário
+            document.getElementById('reportForm').reset();
+            // Resetar label do arquivo
+            document.querySelector('.file-upload-label').innerHTML = '📎 Clique para anexar arquivos<br><small>Ou use as opções abaixo:</small>';
+            
+            // Mostrar mensagem de sucesso
+            showNotification('✅ Denúncia Enviada com Sucesso!', 'success');
         });
 
         // Função para iniciar monitoramento por drone
         function startDroneMonitoring() {
+            if (!isAdminLoggedIn) {
+                showNotification('🔒 Acesso negado. Login administrativo necessário.', 'error');
+                return;
+            }
+            
             const location = document.getElementById('location').value;
             const droneArea = document.getElementById('droneArea').value;
             
-            // Usar localização do formulário principal se área do drone não estiver preenchida
             const targetLocation = droneArea || location;
             
             if (!targetLocation.trim()) {
-                showNotification('Por favor, informe uma localização no campo "Localização" ou especifique a área do drone.', 'warning');
+                showNotification('Por favor, informe uma localização no formulário de denúncia ou especifique a área do drone.', 'warning');
                 return;
             }
 
             const modal = document.getElementById('droneModal');
             const droneFrame = document.getElementById('droneFrame');
             
-            // Atualizar informações do drone
             document.getElementById('droneLocation').textContent = targetLocation;
             document.getElementById('droneStatusText').textContent = 'Voando para o local';
             
-            // Criar URL do Google Earth (visão aérea em movimento)
             const encodedLocation = encodeURIComponent(targetLocation);
-            
-            // URLs alternativas para visão aérea
-            const earthUrl = `https://earth.google.com/web/search/${encodedLocation}`;
-            const satelliteUrl = `https://www.google.com/maps/@?api=1&map_action=map&center=${encodedLocation}&zoom=20&basemap=satellite`;
-            
-            // URL que funciona melhor para embed (Google Maps com vista de satélite)
             const droneViewUrl = `https://maps.google.com/maps?q=${encodedLocation}&t=k&z=20&ie=UTF8&iwloc=&output=embed`;
             
             droneFrame.src = droneViewUrl;
             modal.classList.add('show');
             
-            // Simular movimento e mudanças do drone
             simulateDroneMovement();
             
             showNotification('🛸 Drone Alpha-01 deployado! Iniciando monitoramento aéreo...', 'success');
@@ -1134,8 +1556,6 @@
         function simulateDroneMovement() {
             let altitude = 150;
             let battery = 85;
-            let isRecording = false;
-            let isScanning = true;
             
             const statuses = [
                 'Voando para o local',
@@ -1147,64 +1567,32 @@
             ];
             
             const interval = setInterval(() => {
-                // Se modal não estiver aberto, parar simulação
                 if (!document.getElementById('droneModal').classList.contains('show')) {
                     clearInterval(interval);
                     return;
                 }
                 
-                // Atualizar altitude (flutuação realista)
-                altitude = 120 + Math.random() * 60; // Entre 120m e 180m
+                altitude = 120 + Math.random() * 60;
                 document.getElementById('droneAltitude').textContent = Math.round(altitude) + 'm';
                 
-                // Diminuir bateria gradualmente
                 battery -= Math.random() * 0.5;
                 document.getElementById('droneBattery').textContent = Math.max(20, Math.round(battery)) + '%';
                 
-                // Mudar status aleatoriamente
                 const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
                 document.getElementById('droneStatusText').textContent = randomStatus;
                 
-                // Simular detecções suspeitas
-                if (Math.random() > 0.92) { // 8% de chance
+                if (Math.random() > 0.95) {
                     showNotification('🚨 Drone detectou atividade suspeita na área!', 'warning');
                     document.getElementById('droneStatusText').textContent = 'ALERTA: Atividade suspeita detectada!';
-                    
-                    // Salvar detecção no Firebase
-                    saveDetectionReport(document.getElementById('droneLocation').textContent);
                 }
                 
-                // Simular bateria baixa
                 if (battery < 25) {
                     showNotification('🔋 Bateria do drone baixa. Retornando à base...', 'warning');
                     document.getElementById('droneStatusText').textContent = 'Retornando - Bateria baixa';
                     clearInterval(interval);
                 }
                 
-            }, 3000); // Atualizar a cada 3 segundos
-        }
-
-        // Salvar relatório de detecção automática do drone
-        async function saveDetectionReport(location) {
-            try {
-                const detectionData = {
-                    type: 'drone_detection',
-                    location: location,
-                    description: 'Atividade suspeita detectada por monitoramento aéreo automatizado',
-                    droneId: 'Alpha-01',
-                    detectionType: 'thermal_anomaly',
-                    confidence: Math.round(Math.random() * 30 + 70) + '%', // 70-100%
-                    timestamp: serverTimestamp(),
-                    status: 'auto_detected',
-                    priority: 'high'
-                };
-                
-                await addDoc(collection(db, 'drone_detections'), detectionData);
-                console.log('Detecção automática salva:', detectionData);
-                
-            } catch (error) {
-                console.error('Erro ao salvar detecção:', error);
-            }
+            }, 3000);
         }
 
         // Event listeners para controles do drone
@@ -1215,7 +1603,7 @@
             showNotification('Monitoramento por drone finalizado.', 'info');
         });
 
-        // Fechar modal clicando fora
+        // Fechar modal do drone clicando fora
         document.getElementById('droneModal').addEventListener('click', (e) => {
             if (e.target.id === 'droneModal') {
                 document.getElementById('droneModal').classList.remove('show');
@@ -1258,14 +1646,33 @@
             document.getElementById('droneModal').classList.remove('show');
         });
 
+        // Função para gerar relatório PDF (simulada)
+        document.getElementById('downloadReportBtn').addEventListener('click', () => {
+            if (reportsData.length === 0) {
+                showNotification('Nenhuma denúncia para gerar relatório.', 'warning');
+                return;
+            }
+            
+            showNotification('📥 Gerando relatório PDF...', 'info');
+            
+            setTimeout(() => {
+                showNotification('✅ Relatório PDF baixado com sucesso!', 'success');
+            }, 2000);
+        });
+
         // Simular atualizações em tempo real
         setInterval(() => {
-            const areasMonitored = Math.floor(Math.random() * 5) + 15;
-            document.getElementById('areasMonitored').textContent = areasMonitored;
+            if (isAdminLoggedIn) {
+                const areasMonitored = Math.floor(Math.random() * 5) + 15;
+                document.getElementById('areasMonitored').textContent = areasMonitored;
+            }
         }, 10000);
 
         // Inicialização
-        showNotification('Sistema EcoGuard inicializado com sucesso!', 'success');
+        document.addEventListener('DOMContentLoaded', () => {
+            setupCameraCapture();
+            showNotification('🌳 Sistema EcoGuard inicializado com sucesso!', 'success');
+        });
     </script>
 </body>
 </html>
