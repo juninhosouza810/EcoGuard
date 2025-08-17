@@ -357,6 +357,155 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
+        .drone-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .drone-modal.show {
+            display: flex;
+        }
+
+        .drone-view-container {
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            border-radius: 20px;
+            padding: 20px;
+            width: 95%;
+            max-width: 1000px;
+            height: 90%;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            border: 2px solid #3742fa;
+        }
+
+        .drone-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3742fa;
+        }
+
+        .drone-header h3 {
+            color: #3742fa;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .drone-status-live {
+            background: #dc3545;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        .drone-view-frame {
+            width: 100%;
+            height: calc(100% - 120px);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            background: #000;
+        }
+
+        .drone-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            background: rgba(0,0,0,0.7);
+            padding: 10px 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .drone-control-btn {
+            background: linear-gradient(135deg, #3742fa, #2f3542);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .drone-control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(55, 66, 250, 0.4);
+        }
+
+        .drone-control-btn.active {
+            background: linear-gradient(135deg, #28a745, #20c997);
+        }
+
+        .drone-info {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid #3742fa;
+        }
+
+        .drone-info h4 {
+            margin: 0 0 10px 0;
+            color: #3742fa;
+        }
+
+        .drone-info p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .scanning-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .scanning-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff00, transparent);
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0; opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
         @media (max-width: 768px) {
             .main-content {
                 grid-template-columns: 1fr;
@@ -444,7 +593,8 @@
 
                 <div class="form-group">
                     <label for="droneArea">Área para Monitoramento</label>
-                    <input type="text" id="droneArea" placeholder="Coordenadas ou região específica">
+                    <input type="text" id="droneArea" placeholder="Deixe vazio para usar a localização principal">
+                    <small style="color: #666; font-size: 12px;">💡 Se vazio, será usado o endereço do campo "Localização"</small>
                 </div>
 
                 <button type="button" id="deployDrone" class="btn btn-secondary">Iniciar Monitoramento</button>
@@ -510,6 +660,39 @@
                 <button id="closeMapBtn" class="close-btn">&times;</button>
             </div>
             <iframe id="mapFrame" class="map-iframe" src=""></iframe>
+        </div>
+    </div>
+
+    <!-- Modal de Visão do Drone -->
+    <div id="droneModal" class="drone-modal">
+        <div class="drone-view-container">
+            <div class="drone-header">
+                <h3>🛸 Visão Aérea do Drone - Monitoramento Ativo</h3>
+                <div class="drone-status-live">● AO VIVO</div>
+                <button id="closeDroneBtn" class="close-btn">&times;</button>
+            </div>
+            
+            <div class="drone-info">
+                <h4>🎯 Drone Alpha-01</h4>
+                <p><strong>Status:</strong> <span id="droneStatusText">Voando</span></p>
+                <p><strong>Altitude:</strong> <span id="droneAltitude">150m</span></p>
+                <p><strong>Bateria:</strong> <span id="droneBattery">85%</span></p>
+                <p><strong>Localização:</strong> <span id="droneLocation">Carregando...</span></p>
+            </div>
+
+            <iframe id="droneFrame" class="drone-view-frame" src=""></iframe>
+            
+            <div class="scanning-overlay">
+                <div class="scanning-line"></div>
+            </div>
+
+            <div class="drone-controls">
+                <button class="drone-control-btn" id="zoomInBtn">🔍 Zoom +</button>
+                <button class="drone-control-btn" id="thermalBtn">🌡️ Térmico</button>
+                <button class="drone-control-btn active" id="normalBtn">📷 Normal</button>
+                <button class="drone-control-btn" id="recordBtn">🔴 Gravar</button>
+                <button class="drone-control-btn" id="returnBtn">🏠 Retornar</button>
+            </div>
         </div>
     </div>
 
@@ -696,39 +879,171 @@
             }
         });
 
-        // Simular deploy de drone
-        document.getElementById('deployDrone').addEventListener('click', async () => {
-            const area = document.getElementById('droneArea').value;
+        // Função para iniciar monitoramento por drone
+        function startDroneMonitoring() {
+            const location = document.getElementById('location').value;
+            const droneArea = document.getElementById('droneArea').value;
             
-            if (!area) {
-                showNotification('Por favor, especifique a área para monitoramento.', 'warning');
+            // Usar localização do formulário principal se área do drone não estiver preenchida
+            const targetLocation = droneArea || location;
+            
+            if (!targetLocation.trim()) {
+                showNotification('Por favor, informe uma localização no campo "Localização" ou especifique a área do drone.', 'warning');
                 return;
             }
+
+            const modal = document.getElementById('droneModal');
+            const droneFrame = document.getElementById('droneFrame');
             
+            // Atualizar informações do drone
+            document.getElementById('droneLocation').textContent = targetLocation;
+            document.getElementById('droneStatusText').textContent = 'Voando para o local';
+            
+            // Criar URL do Google Earth (visão aérea em movimento)
+            const encodedLocation = encodeURIComponent(targetLocation);
+            
+            // URLs alternativas para visão aérea
+            const earthUrl = `https://earth.google.com/web/search/${encodedLocation}`;
+            const satelliteUrl = `https://www.google.com/maps/@?api=1&map_action=map&center=${encodedLocation}&zoom=20&basemap=satellite`;
+            
+            // URL que funciona melhor para embed (Google Maps com vista de satélite)
+            const droneViewUrl = `https://maps.google.com/maps?q=${encodedLocation}&t=k&z=20&ie=UTF8&iwloc=&output=embed`;
+            
+            droneFrame.src = droneViewUrl;
+            modal.classList.add('show');
+            
+            // Simular movimento e mudanças do drone
+            simulateDroneMovement();
+            
+            showNotification('🛸 Drone Alpha-01 deployado! Iniciando monitoramento aéreo...', 'success');
+        }
+
+        // Simular movimento e dados do drone
+        function simulateDroneMovement() {
+            let altitude = 150;
+            let battery = 85;
+            let isRecording = false;
+            let isScanning = true;
+            
+            const statuses = [
+                'Voando para o local',
+                'Escaneando área',
+                'Detectando anomalias',
+                'Monitoramento ativo',
+                'Coletando dados',
+                'Analisando vegetação'
+            ];
+            
+            const interval = setInterval(() => {
+                // Se modal não estiver aberto, parar simulação
+                if (!document.getElementById('droneModal').classList.contains('show')) {
+                    clearInterval(interval);
+                    return;
+                }
+                
+                // Atualizar altitude (flutuação realista)
+                altitude = 120 + Math.random() * 60; // Entre 120m e 180m
+                document.getElementById('droneAltitude').textContent = Math.round(altitude) + 'm';
+                
+                // Diminuir bateria gradualmente
+                battery -= Math.random() * 0.5;
+                document.getElementById('droneBattery').textContent = Math.max(20, Math.round(battery)) + '%';
+                
+                // Mudar status aleatoriamente
+                const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+                document.getElementById('droneStatusText').textContent = randomStatus;
+                
+                // Simular detecções suspeitas
+                if (Math.random() > 0.92) { // 8% de chance
+                    showNotification('🚨 Drone detectou atividade suspeita na área!', 'warning');
+                    document.getElementById('droneStatusText').textContent = 'ALERTA: Atividade suspeita detectada!';
+                    
+                    // Salvar detecção no Firebase
+                    saveDetectionReport(document.getElementById('droneLocation').textContent);
+                }
+                
+                // Simular bateria baixa
+                if (battery < 25) {
+                    showNotification('🔋 Bateria do drone baixa. Retornando à base...', 'warning');
+                    document.getElementById('droneStatusText').textContent = 'Retornando - Bateria baixa';
+                    clearInterval(interval);
+                }
+                
+            }, 3000); // Atualizar a cada 3 segundos
+        }
+
+        // Salvar relatório de detecção automática do drone
+        async function saveDetectionReport(location) {
             try {
-                const droneData = {
-                    area: area,
+                const detectionData = {
+                    type: 'drone_detection',
+                    location: location,
+                    description: 'Atividade suspeita detectada por monitoramento aéreo automatizado',
+                    droneId: 'Alpha-01',
+                    detectionType: 'thermal_anomaly',
+                    confidence: Math.round(Math.random() * 30 + 70) + '%', // 70-100%
                     timestamp: serverTimestamp(),
-                    status: 'deployed',
-                    missionType: 'patrol'
+                    status: 'auto_detected',
+                    priority: 'high'
                 };
                 
-                await addDoc(collection(db, 'drone_missions'), droneData);
-                
-                showNotification('Drone enviado para monitoramento da área especificada!', 'success');
-                document.getElementById('droneArea').value = '';
-                
-                // Simular detecção após alguns segundos
-                setTimeout(() => {
-                    showNotification('Drone detectou atividade suspeita! Enviando relatório...', 'warning');
-                    alertCount++;
-                    document.getElementById('alertsSent').textContent = alertCount;
-                }, 5000);
+                await addDoc(collection(db, 'drone_detections'), detectionData);
+                console.log('Detecção automática salva:', detectionData);
                 
             } catch (error) {
-                console.error('Erro ao deploy do drone:', error);
-                showNotification('Erro ao iniciar monitoramento. Tente novamente.', 'error');
+                console.error('Erro ao salvar detecção:', error);
             }
+        }
+
+        // Event listeners para controles do drone
+        document.getElementById('deployDrone').addEventListener('click', startDroneMonitoring);
+
+        document.getElementById('closeDroneBtn').addEventListener('click', () => {
+            document.getElementById('droneModal').classList.remove('show');
+            showNotification('Monitoramento por drone finalizado.', 'info');
+        });
+
+        // Fechar modal clicando fora
+        document.getElementById('droneModal').addEventListener('click', (e) => {
+            if (e.target.id === 'droneModal') {
+                document.getElementById('droneModal').classList.remove('show');
+                showNotification('Monitoramento por drone finalizado.', 'info');
+            }
+        });
+
+        // Controles do drone
+        document.getElementById('zoomInBtn').addEventListener('click', () => {
+            showNotification('🔍 Zoom aumentado para análise detalhada', 'info');
+        });
+
+        document.getElementById('thermalBtn').addEventListener('click', function() {
+            showNotification('🌡️ Câmera térmica ativada - Detectando fontes de calor', 'info');
+            this.classList.add('active');
+            document.getElementById('normalBtn').classList.remove('active');
+        });
+
+        document.getElementById('normalBtn').addEventListener('click', function() {
+            showNotification('📷 Câmera normal ativada', 'info');
+            this.classList.add('active');
+            document.getElementById('thermalBtn').classList.remove('active');
+        });
+
+        document.getElementById('recordBtn').addEventListener('click', function() {
+            const isRecording = this.textContent.includes('Gravar');
+            if (isRecording) {
+                this.textContent = '⏹️ Parar';
+                this.classList.add('active');
+                showNotification('🔴 Gravação iniciada - Coletando evidências', 'info');
+            } else {
+                this.textContent = '🔴 Gravar';
+                this.classList.remove('active');
+                showNotification('⏹️ Gravação finalizada e salva', 'success');
+            }
+        });
+
+        document.getElementById('returnBtn').addEventListener('click', () => {
+            showNotification('🏠 Drone retornando à base para recarga', 'info');
+            document.getElementById('droneModal').classList.remove('show');
         });
 
         // Simular atualizações em tempo real
